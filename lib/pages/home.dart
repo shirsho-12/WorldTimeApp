@@ -24,7 +24,7 @@ class _HomeState extends State<Home> {
       print(o);
     }
     else {
-      data = ModalRoute.of(context)!.settings.arguments as Map;
+      data = data.isNotEmpty? data: ModalRoute.of(context)!.settings.arguments as Map;
     }
     print(data);
 
@@ -37,7 +37,7 @@ class _HomeState extends State<Home> {
         child: Container(
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/$bgImage'),
+              image: AssetImage(bgImage),
               fit: BoxFit.cover,
             )
           ),
@@ -46,8 +46,16 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: <Widget>[
                   FlatButton.icon(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/location');
+                    onPressed: () async {
+                      dynamic result = await Navigator.pushNamed(context, '/location');
+                      setState(() {
+                        data = {
+                          'time': result['time'],
+                          'location': result['location'],
+                          'isDayTime': result['isDayTime'],
+                          'flag': result['flag'],
+                        };
+                      });
                     },
                     icon: const Icon(
                       Icons.edit_location,
@@ -69,7 +77,7 @@ class _HomeState extends State<Home> {
                         style: const TextStyle(
                           fontSize: 28,
                           letterSpacing: 2,
-                          color: Colors.white,f
+                          color: Colors.white
                         ),
                       ),
                     ],

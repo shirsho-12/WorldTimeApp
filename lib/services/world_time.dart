@@ -35,7 +35,7 @@ class WorldTime {
       time = DateFormat.jm().format(now);
     }
     catch (e) {
-      print("Caught Error: $e");
+      // print("Caught Error: $e");
       time = "Could not get time data";
     }
 

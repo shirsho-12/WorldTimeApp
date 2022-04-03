@@ -21,12 +21,12 @@ class _HomeState extends State<Home> {
     if (o == null) {
       data = {'location': 'Berlin', 'flag': 'germany.png',
         'time': '12:34 PM', 'isDayTime': true};
-      print(o);
+      // print(o);
     }
     else {
       data = data.isNotEmpty? data: ModalRoute.of(context)!.settings.arguments as Map;
     }
-    print(data);
+    // print(data);
 
     String bgImage = data['isDayTime'] ? 'day.png' : 'night.png';
     Color? bgColor = data['isDayTime'] ? Colors.blue : Colors.indigo[700];
